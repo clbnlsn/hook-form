@@ -11,6 +11,40 @@ const Form = (props) => {
         e.preventDefault();
     }
 
+    const firstNameValid = (title) => {
+        if(title.length <2){
+            return false;
+        }
+        return true;
+    }
+    const lastNameValid = (words) => {
+        if(words.length <2){
+            return false;
+        }
+        return true;
+    }
+    const emailValid = (email) => {
+        if(email.length <5){
+            return false;
+        }
+        return true;
+    }
+    const passwordValid = (pw) => {
+        if(pw.length <8){
+            return false;
+        }
+        return true;
+    }
+    const passwordMatch = (password, confirm) => {
+        if(password === confirm){
+            return true;
+        }
+        return false;
+    }
+    // const onChangeHandler = (e) => {
+    //     setFormState
+    // }
+
     return(
         <div>
             <form onSubmit={(e) => handleSubmit(e)} className="">
@@ -22,7 +56,7 @@ const Form = (props) => {
                         onChange={ (e) => setFirstName(e.target.value) }
                     />
                 </label>
-            
+                {firstNameValid(firstName) ? null : <p>name must be at least 2 characters</p>}
                 <label htmlFor="" className="form-group">Last Name:
                     <input 
                         type="text"
@@ -31,7 +65,7 @@ const Form = (props) => {
                         onChange={ (e) => setLastName(e.target.value) }
                     />
                 </label>
-            
+                {lastNameValid(lastName) ? null : <p>name must be at least 2 characters</p>}
                 <label htmlFor="" className="form-group">Email:
                     <input 
                         type="email"
@@ -40,7 +74,7 @@ const Form = (props) => {
                         onChange={ (e) => setEmail(e.target.value) }
                     />
                 </label>
-
+                {emailValid(email) ? null : <p>email must be at least 5 characters</p>}
                 <label htmlFor="" className="form-group">Password:
                     <input 
                         type="password"
@@ -49,7 +83,7 @@ const Form = (props) => {
                         onChange={ (e) => setPassword(e.target.value) }
                     />
                 </label>
-
+                {passwordValid(password) ? null : <p>password must be at least 8 characters</p>}
                 <label htmlFor="" className="form-group">Confirm Password:
                     <input 
                         type="password"
@@ -58,7 +92,8 @@ const Form = (props) => {
                         onChange={ (e) => setConfirmPassword(e.target.value) }
                     />
                 </label>
-
+                {passwordValid(password) ? null : <p>password must be at least 8 characters</p>}
+                {passwordMatch(password, confirmPassword) ? null : <p>passwords must match!</p>}
                 <input 
                     type="submit"
                     value="Submit!"
